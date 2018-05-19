@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.touhidroid.library.EmoTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emo="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/emo_icon"
+    android:layout_width="36dip"
+    android:layout_height="36dip"
+    android:layout_gravity="center"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:gravity="center"
+    emo:emoSize="30dip" />
