@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.ListView
+import android.widget.RelativeLayout
 import com.touhidroid.library.EmoEditText
 import com.touhidroid.library.EmoGridView
 import com.touhidroid.library.EmoPopup
@@ -15,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val lv = findViewById<ListView>(R.id.lv)
+        val lv: ListView = findViewById(R.id.lv)
         val mAdapter = ArrayAdapter<String>(this, R.layout.listview_row_layout)
         lv.adapter = mAdapter
         val emojiconEditText = findViewById<EmoEditText>(R.id.emojicon_edit_text)
@@ -44,19 +47,19 @@ class MainActivity : AppCompatActivity() {
         })
 
         //On emo clicked, add it to edittext
-        popup.setOnEmoClickListener(EmoGridView.OnEmoClickListener { emojicon ->
-            if (emojiconEditText == null || emojicon == null) {
+        popup.setOnEmoClickListener(EmoGridView.OnEmoClickListener { emo ->
+            if (emojiconEditText == null || emo == null) {
                 return@OnEmoClickListener
             }
 
             val start = emojiconEditText.selectionStart
             val end = emojiconEditText.selectionEnd
             if (start < 0) {
-                emojiconEditText.append(emojicon.emo)
+                emojiconEditText.append(emo.emo)
             } else {
                 emojiconEditText.text.replace(Math.min(start, end),
-                        Math.max(start, end), emojicon.emo, 0,
-                        emojicon.emo.length)
+                        Math.max(start, end), emo.emo, 0,
+                        emo.emo.length)
             }
         })
 
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 }//else, open the text keyboard first and immediately after that show the emoji popup
             } else {
                 popup.dismiss()
-            }//If popup is showing, simply dismiss it to show the undelying text keyboard
+            }//If popup is showing, simply dismiss it to show the underlying text keyboard
         }
 
         //On submit, add the edittext text to listview and clear the edittext

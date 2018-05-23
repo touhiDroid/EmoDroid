@@ -78,14 +78,14 @@ public class EmoPopup extends PopupWindow implements ViewPager.OnPageChangeListe
     }
 
     /**
-     * Set the listener for the event when backspace on emojicon popup is clicked
+     * Set the listener for the event when backspace on emocon popup is clicked
      */
     public void setOnEmoBackspaceClickListener(OnEmoBackspaceClickListener listener) {
         this.onEmoBackspaceClickListener = listener;
     }
 
     /**
-     * Use this function to show the emoji popup.
+     * Use this function to show the emo popup.
      * NOTE: Since, the soft keyboard sizes are variable on different android devices, the
      * library needs you to open the soft keyboard atleast once before calling this function.
      * If that is not possible see showAtBottomPending() function.
@@ -96,7 +96,7 @@ public class EmoPopup extends PopupWindow implements ViewPager.OnPageChangeListe
 
     /**
      * Use this function when the soft keyboard has not been opened yet. This
-     * will show the emoji popup after the keyboard is up next time.
+     * will show the emo popup after the keyboard is up next time.
      * Generally, you will be calling InputMethodManager.showSoftInput function after
      * calling this function.
      */
@@ -125,7 +125,7 @@ public class EmoPopup extends PopupWindow implements ViewPager.OnPageChangeListe
     }
 
     /**
-     * Call this function to resize the emoji popup according to your soft keyboard size
+     * Call this function to resize the emo popup according to your soft keyboard size
      */
     public void setSizeForSoftKeyboard() {
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -165,6 +165,10 @@ public class EmoPopup extends PopupWindow implements ViewPager.OnPageChangeListe
         });
     }
 
+    public int getCurKeyboardHeight() {
+        return keyBoardHeight;
+    }
+
     private int getUsableScreenHeight() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             DisplayMetrics metrics = new DisplayMetrics();
@@ -194,7 +198,7 @@ public class EmoPopup extends PopupWindow implements ViewPager.OnPageChangeListe
     private View createCustomView() {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.emo, null, false);
-        emoPager = view.findViewById(R.id.emojis_pager);
+        emoPager = view.findViewById(R.id.emos_pager);
         emoPager.setOnPageChangeListener(this);
         EmoRecent recents = this;
         mEmoAdapter = new EmoPagerAdapter(
@@ -209,12 +213,12 @@ public class EmoPopup extends PopupWindow implements ViewPager.OnPageChangeListe
         );
         emoPager.setAdapter(mEmoAdapter);
         mEmoTabs = new View[6];
-        mEmoTabs[0] = view.findViewById(R.id.emojis_tab_0_recents);
-        mEmoTabs[1] = view.findViewById(R.id.emojis_tab_1_people);
-        mEmoTabs[2] = view.findViewById(R.id.emojis_tab_2_nature);
-        mEmoTabs[3] = view.findViewById(R.id.emojis_tab_3_objects);
-        mEmoTabs[4] = view.findViewById(R.id.emojis_tab_4_cars);
-        mEmoTabs[5] = view.findViewById(R.id.emojis_tab_5_punctuation);
+        mEmoTabs[0] = view.findViewById(R.id.emos_tab_0_recents);
+        mEmoTabs[1] = view.findViewById(R.id.emos_tab_1_people);
+        mEmoTabs[2] = view.findViewById(R.id.emos_tab_2_nature);
+        mEmoTabs[3] = view.findViewById(R.id.emos_tab_3_objects);
+        mEmoTabs[4] = view.findViewById(R.id.emos_tab_4_cars);
+        mEmoTabs[5] = view.findViewById(R.id.emos_tab_5_punctuation);
         for (int i = 0; i < mEmoTabs.length; i++) {
             final int position = i;
             mEmoTabs[i].setOnClickListener(new View.OnClickListener() {
@@ -224,7 +228,7 @@ public class EmoPopup extends PopupWindow implements ViewPager.OnPageChangeListe
                 }
             });
         }
-        view.findViewById(R.id.emojis_backspace).setOnTouchListener(new RepeatListener(1000, 50, new OnClickListener() {
+        view.findViewById(R.id.emos_backspace).setOnTouchListener(new RepeatListener(1000, 50, new OnClickListener() {
 
             @Override
             public void onClick(View v) {

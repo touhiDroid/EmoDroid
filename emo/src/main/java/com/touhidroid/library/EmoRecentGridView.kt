@@ -26,8 +26,9 @@ import com.touhidroid.library.emo.Emo
  * @author Daniele Ricci
  * @author Ankush Sachdeva (sankush@yahoo.co.in)
  */
-class EmoRecentGridView(context: Context, emojicons: Array<Emo>,
-                        recents: EmoRecent, emoPopup: EmoPopup) : EmoGridView(context, emojicons, recents, emoPopup), EmoRecent {
+class EmoRecentGridView(context: Context, emojicons: Array<Emo>?,
+                        recents: EmoRecent?, emoPopup: EmoPopup)
+    : EmoGridView(context, emojicons, recents, emoPopup), EmoRecent {
     private var mAdapter: EmoAdapter? = null
 
     init {
@@ -43,8 +44,7 @@ class EmoRecentGridView(context: Context, emojicons: Array<Emo>,
     }
 
     override fun addRecentEmo(context: Context, emojicon: Emo) {
-        val recentEmo = EmoRecentManager
-                .getInstance(context)
+        val recentEmo = EmoRecentManager.getInstance(context)
         recentEmo.push(emojicon)
 
         // notify dataset changed
